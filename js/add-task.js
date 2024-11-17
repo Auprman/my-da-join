@@ -26,9 +26,9 @@ const errorCategory = document.getElementById('error-category-add-task');
 
 // VARIABLES
 const BASE_URL =
-  'https://da-join-789b8-default-rtdb.europe-west1.firebasedatabase.app/';
+  'https://my-join-27c95-default-rtdb.europe-west1.firebasedatabase.app/';
 CONTACT_URL =
-  'https://da-join-789b8-default-rtdb.europe-west1.firebasedatabase.app/contacts.json';
+  'https://my-join-27c95-default-rtdb.europe-west1.firebasedatabase.app/contacts.json';
 let subtasks = [];
 let editSubtasks = [];
 let assignedContacts = [];

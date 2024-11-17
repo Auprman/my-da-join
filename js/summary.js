@@ -1,5 +1,5 @@
-const BASE_URL = 'https://da-join-789b8-default-rtdb.europe-west1.firebasedatabase.app/users';
-const TASKS_URL = 'https://da-join-789b8-default-rtdb.europe-west1.firebasedatabase.app/tasks';
+const BASE_URL = 'https://my-join-27c95-default-rtdb.europe-west1.firebasedatabase.app/users';
+const TASKS_URL = 'https://my-join-27c95-default-rtdb.europe-west1.firebasedatabase.app/tasks';
 
 const monthString = ['Januar','Februar','März','April','Mai','Juni','Juli','August','September','Oktober','November','Dezember'];
 

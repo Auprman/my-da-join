@@ -1,5 +1,5 @@
 const BASE_URL =
-  'https://da-join-789b8-default-rtdb.europe-west1.firebasedatabase.app/users';
+  'https://my-join-27c95-default-rtdb.europe-west1.firebasedatabase.app/users';
 
 /**
  * This function is active when the body loads. It sets up the whole login page
