@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
+    <link
+      rel="stylesheet"
+      href="../style.css"
+    />
+    <link
+      rel="stylesheet"
+      href="../styles/summary.css"
+    />
+    <link
+      rel="stylesheet"
+      href="../styles/summaryresponsive.css"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      href="../assets/img/logo-white.png"
+    />
+    <title>Summary - Join</title>
+  </head>
+  <body onload="initSummary()">
+    <header class="header">
+      <img
+        class="logo-responsive"
+        src="../assets/img/logo-black.png"
+      />
+      <div
+        id="dropdown-profile"
+        class="dropdown-profile"
+      >
+        <div
+          onclick="location.href='help.html'; removeFirstLogin()"
+          class="dropdown-profile-buttons help-button"
+        >
+          Help
+        </div>
+        <a
+          class="dropdown-profile-buttons"
+          href="legal-notice.html"
+          >Legal Notice</a
+        >
+        <a
+          class="dropdown-profile-buttons"
+          href="privacy-policy.html"
+          >Privacy Policy</a
+        >
+        <div
+          onclick="guestLogInOrLogOut(); removeFirstLogin()"
+          class="dropdown-profile-buttons"
+        >
+          Log out
+        </div>
+      </div>
+      <p class="project-tool-info">Kanban Project Management Tool</p>
+      <div class="header-user-box">
+        <div class="help-logo">
+          <a href="../html/help.html"
+            ><img
+              src="../assets/icons/help.png"
+              alt=""
+          /></a>
+        </div>
+
+        <div
+          onclick="showProfileDropDownMenu()"
+          id="user-initials"
+          class="user-initials"
+        ></div>
+      </div>
+    </header>
+    <div
+      id="greeting-overlay-responsive"
+      class="greeting-overlay-responsive"
+    ></div>
+    <aside class="sidebar">
+      <a href="../html/summary.html"
+        ><img
+          class="sidebar-logo"
+          src="../assets/img/logo-white.png"
+          alt="logo white img"
+        />
+      </a>
+
+      <nav class="navbar">
+        <div class="nav-links-container">
+          <a
+            style="color: white; background-color: #091931"
+            class="nav-links"
+          >
+            <img
+              style="filter: brightness(150%)"
+              src="../assets/icons/summary.png"
+              alt="summary icon"
+            />Summary</a
+          >
+
+          <a
+            href="../html/add-task.html"
+            class="nav-links"
+          >
+            <img
+              src="../assets/icons/add-task.png"
+              alt="add task icon"
+            />
+            Add Task</a
+          >
+
+          <a
+            href="../html/board.html"
+            class="nav-links"
+          >
+            <img
+              src="../assets/icons/board.png"
+              alt="board icon"
+            />
+            Board</a
+          >
+
+          <a
+            href="../html/contacts.html"
+            class="nav-links"
+          >
+            <img
+              src="../assets/icons/contacts.png"
+              alt="contacts icon"
+            />Contacts</a
+          >
+        </div>
+        <div class="../privacy-legal-notice-links-container">
+          <a
+            href="../html/privacy-policy.html"
+            class="nav-links"
+            id="privacy-policy"
+          >
+            Privacy Policy</a
+          >
+          <a
+            href="../html/legal-notice.html"
+            class="nav-links"
+            id="legal-notice"
+          >
+            Legal Notice</a
+          >
+        </div>
+      </nav>
+    </aside>
+
+    <div class="summary-content">
+      <div class="summary-title">
+        <b>Join 360</b>
+        <div class="seperator"></div>
+        <p>Key Metrics at a Glance</p>
+        <div class="hidden-seperator"></div>
+      </div>
+      <div class="summary-overview">
+        <div class="summary-overview-tasks">
+          <div class="summary-overview-top">
+            <a
+              class="to-do task"
+              href="board.html"
+            >
+              <img
+                class="icons-top"
+                src="../assets/icons/summary-todo.png"
+              />
+              <div style="flex-direction: column; display: flex">
+                <span
+                  class="task-counter"
+                  id="to-do-tasks"
+                ></span>
+                <span class="task-description">To-Do</span>
+              </div>
+            </a>
+            <a
+              class="to-do task"
+              href="board.html"
+            >
+              <img
+                class="icons-top"
+                src="../assets/icons/summary-done.png"
+              />
+              <div style="flex-direction: column; display: flex">
+                <span
+                  class="task-counter"
+                  id="done-tasks"
+                ></span>
+                <span class="task-description">Done</span>
+              </div>
+            </a>
+          </div>
+          <a
+            class="urgent-tasks-board task"
+            href="board.html"
+          >
+            <img
+              class="icon"
+              src="../assets/icons/summary-urgent.png"
+            />
+            <div class="urgent">
+              <div class="urgent-only-text">
+                <span
+                  class="task-counter"
+                  id="urgent-tasks"
+                ></span>
+                <span class="task-description">Urgent</span>
+              </div>
+              <div class="second-seperator"></div>
+              <div class="deadline">
+                <b id="deadline"></b>
+                <span>Upcoming Deadline</span>
+              </div>
+            </div>
+          </a>
+          <div class="summary-overview-bottom">
+            <a
+              class="tasks-bottom task"
+              href="board.html"
+            >
+              <div style="flex-direction: column; display: flex">
+                <span
+                  class="task-counter"
+                  id="tasks-in-board"
+                ></span>
+                <span class="task-description">Tasks in Board</span>
+              </div>
+            </a>
+            <a
+              class="tasks-bottom task"
+              href="board.html"
+            >
+              <div style="flex-direction: column; display: flex">
+                <span
+                  class="task-counter"
+                  id="tasks-in-progress"
+                ></span>
+                <span class="task-description">Tasks in Progress</span>
+              </div>
+            </a>
+            <a
+              class="tasks-bottom task"
+              href="board.html"
+            >
+              <div style="flex-direction: column; display: flex">
+                <span
+                  class="task-counter"
+                  id="awaiting-feedback"
+                ></span>
+                <span class="task-description">Awaiting Feedback</span>
+              </div>
+            </a>
+          </div>
+        </div>
+        <div
+          id="greeting"
+          class="greeting"
+        >
+          <span id="time-of-the-day"></span>
+          <span id="name"></span>
+        </div>
+      </div>
+    </div>
+    <footer id="footer">
+      <div class="nav-links-summary">
+        <a
+          style="color: white"
+          class="nav-links"
+        >
+          <img
+            style="filter: brightness(150%)"
+            src="../assets/icons/summary.png"
+            alt="summary icon"
+          />Summary</a
+        >
+      </div>
+      <div class="nav-links-responsive">
+        <a
+          onclick="removeFirstLogin();"
+          href="../html/add-task.html"
+          class="nav-links"
+        >
+          <img
+            src="../assets/icons/add-task.png"
+            alt="add task icon"
+          />
+          Add Task</a
+        >
+      </div>
+      <div class="nav-links-responsive">
+        <a
+          onclick="removeFirstLogin()"
+          href="../html/board.html"
+          class="nav-links"
+        >
+          <img
+            src="../assets/icons/board.png"
+            alt="board icon"
+          />
+          Board</a
+        >
+      </div>
+      <div class="nav-links-responsive">
+        <a
+          onclick="removeFirstLogin()"
+          href="../html/contacts.html"
+          class="nav-links"
+        >
+          <img
+            src="../assets/icons/contacts.png"
+            alt="contacts icon"
+          />Contacts</a
+        >
+      </div>
+    </footer>
+    <script src="../js/summary.js"></script>
+    <script src="../js/script.js"></script>
+  </body>
+</html>

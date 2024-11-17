@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
+    <title>Help - Join</title>
+
+    <!--Favicon--->
+    <link
+      rel="icon"
+      type="image/png"
+      href="../assets/img/logo-white.png"
+    />
+
+    <!--Styles-->
+    <link
+      rel="stylesheet"
+      href="../style.css"
+    />
+    <link
+      rel="stylesheet"
+      href="../styles/help.css"
+    />
+    <script
+      src="../js/script.js"
+      defer
+    ></script>
+  </head>
+
+  <body onload="init()">
+    <header class="header">
+      <img
+        class="logo-responsive"
+        src="../assets/img/logo-black.png"
+      />
+      <div
+        id="dropdown-profile"
+        class="dropdown-profile"
+      >
+        <div
+          onclick="location.href='help.html'; removeFirstLogin()"
+          class="dropdown-profile-buttons help-button"
+        >
+          Help
+        </div>
+        <a
+          class="dropdown-profile-buttons"
+          href="legal-notice.html"
+          >Legal Notice</a
+        >
+        <a
+          class="dropdown-profile-buttons"
+          href="privacy-policy.html"
+          >Privacy Policy</a
+        >
+        <div
+          onclick="guestLogInOrLogOut(); removeFirstLogin()"
+          class="dropdown-profile-buttons"
+        >
+          Log out
+        </div>
+      </div>
+      <p class="project-tool-info">Kanban Project Management Tool</p>
+      <div class="header-user-box">
+        <div
+          onclick="showProfileDropDownMenu()"
+          id="user-initials"
+          class="user-initials"
+        ></div>
+      </div>
+    </header>
+
+    <aside class="sidebar">
+      <a href="../html/summary.html"
+        ><img
+          class="sidebar-logo"
+          src="../assets/img/logo-white.png"
+          alt="logo white img"
+        />
+      </a>
+
+      <nav class="navbar">
+        <div class="nav-links-container">
+          <a
+            href="../html/summary.html"
+            class="nav-links"
+          >
+            <img
+              src="../assets/icons/summary.png"
+              alt="summary icon"
+            />Summary</a
+          >
+
+          <a
+            href="../html/add-task.html"
+            class="nav-links"
+          >
+            <img
+              src="../assets/icons/add-task.png"
+              alt="add task icon"
+            />
+            Add Task</a
+          >
+
+          <a
+            href="../html/board.html"
+            class="nav-links"
+          >
+            <img
+              src="../assets/icons/board.png"
+              alt="board icon"
+            />
+            Board</a
+          >
+
+          <a
+            href="../html/contacts.html"
+            class="nav-links"
+          >
+            <img
+              src="../assets/icons/contacts.png"
+              alt="contacts icon"
+            />Contacts</a
+          >
+        </div>
+        <div class="../privacy-legal-notice-links-container">
+          <a
+            href="../html/privacy-policy.html"
+            class="nav-links"
+            id="privacy-policy"
+          >
+            Privacy Policy</a
+          >
+          <a
+            href="../html/legal-notice.html"
+            class="nav-links"
+            id="legal-notice"
+          >
+            Legal Notice</a
+          >
+        </div>
+      </nav>
+    </aside>
+
+    <main class="default-main-container">
+      <div
+        class="default-sidebar"
+        w3-include-html="./assets/templates/sidebar.html"
+      ></div>
+
+      <div class="content">
+        <div class="content-header">
+          <h1 class="headline">Help</h1>
+          <div onclick="goBack()" class="back-arrow-div">
+            <img class="back-arrow" src="../assets/icons/back-arrow.png">
+          </div>
+        </div>
+        <p>
+          Welcome to the help page for Join, your guide to using our kanban
+          project management tool. Here, we'll provide an overview of what Join
+          is, how it can benefit you, and how to use it.
+        </p>
+
+        <h2>What is Join?</h2>
+
+        <p>
+          Join is a kanban-based project management tool designed and built by a
+          group of dedicated students as part of their web development bootcamp
+          at the Developer Akademie.
+        </p>
+
+        <p>
+          Kanban, a Japanese term meaning "billboard", is a highly effective
+          method to visualize work, limit work-in-progress, and maximize
+          efficiency (or flow). Join leverages the principles of kanban to help
+          users manage their tasks and projects in an intuitive, visual
+          interface.
+        </p>
+
+        <p>
+          It is important to note that Join is designed as an educational
+          exercise and is not intended for extensive business usage. While we
+          strive to ensure the best possible user experience, we cannot
+          guarantee consistent availability, reliability, accuracy, or other
+          aspects of quality regarding Join.
+        </p>
+
+        <h2>How to use it</h2>
+
+        <p>Here is a step-by-step guide on how to use Join:</p>
+
+        <ol>
+          <li>
+            <h3>Exploring the Board</h3>
+            When you log in to Join, you'll find a default board. This board
+            represents your project and contains four default lists: "To Do",
+            "In Progress", "Await feedback" and "Done".
+          </li>
+
+          <li>
+            <h3>Creating Contacts</h3>
+            In Join, you can add contacts to collaborate on your projects. Go to
+            the "Contacts" section, click on "New contact", and fill in the
+            required information. Once added, these contacts can be assigned
+            tasks and they can interact with the tasks on the board.
+          </li>
+
+          <li>
+            <h3>Adding Cards</h3>
+            Now that you've added your contacts, you can start adding cards.
+            Cards represent individual tasks. Click the "+" button under the
+            appropriate list to create a new card. Fill in the task details in
+            the card, like task name, description, due date, assignees, etc.
+          </li>
+
+          <li>
+            <h3>Moving Cards</h3>
+            As the task moves from one stage to another, you can reflect that on
+            the board by dragging and dropping the card from one list to
+            another.
+          </li>
+
+          <li>
+            <h3>Deleting Cards</h3>
+            Once a task is completed, you can either move it to the "Done" list
+            or delete it. Deleting a card will permanently remove it from the
+            board. Please exercise caution when deleting cards, as this action
+            is irreversible. Remember that using Join effectively requires
+            consistent updates from you and your team to ensure the board
+            reflects the current state of your project. Have more questions
+            about Join? Feel free to contact us at [Your Contact Email]. We're
+            here to help you!
+          </li>
+        </ol>
+
+        <h2>Enjoy using Join!</h2>
+      </div>
+    </main>
+    <footer>
+      <div class="nav-links-responsive">
+        <a
+          href="../html/summary.html"
+          class="nav-links"
+        >
+          <img
+            src="../assets/icons/summary.png"
+            alt="summary icon"
+          />Summary</a
+        >
+      </div>
+      <div class="nav-links-responsive">
+        <a
+          onclick="removeFirstLogin()"
+          href="../html/add-task.html"
+          class="nav-links"
+        >
+          <img
+            src="../assets/icons/add-task.png"
+            alt="add task icon"
+          />
+          Add Task</a
+        >
+      </div>
+      <div class="nav-links-responsive">
+        <a
+          onclick="removeFirstLogin()"
+          href="../html/board.html"
+          class="nav-links"
+        >
+          <img
+            src="../assets/icons/board.png"
+            alt="board icon"
+          />
+          Board</a
+        >
+      </div>
+      <div class="nav-links-responsive">
+        <a
+          onclick="removeFirstLogin()"
+          href="../html/contacts.html"
+          class="nav-links"
+        >
+          <img
+            src="../assets/icons/contacts.png"
+            alt="contacts icon"
+          />Contacts</a
+        >
+      </div>
+    </footer>
+  </body>
+</html>

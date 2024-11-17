@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Join Login</title>
+    <link rel="stylesheet"href="../style.css"/>
+    <link rel="stylesheet" href="../styles/login.css">
+    <link rel="stylesheet" href="../styles/loginresponsive.css">
+    <link rel="icon"type="image/png"href="../assets/img/logo-white.png"/>
+    <script src="../js/script.js"></script>
+    <script src="../js/login.js"></script>
+    <script src="../js/login-template.js"></script>
+</head>
+<body onload="init()">
+    <div id="signed-up-overlay" class="signed-up-overlay">
+        <div id="signed-up-container" class="you-signed-up">
+            You Signed Up successfully
+        </div>
+    </div>
+    <div id="loading-overlay-id" class="loading-overlay"></div>
+    <div class="headline">
+        <div class="logo-container">
+            <img id="logo" class="logo" src="../assets/img/logo-black.png">
+            <img id="logo-white" class="logo" src="../assets/img/logo-white.png">
+        </div>
+        <div id="sign-up-top-right-id" class="sign-up-top-right">
+            <span>Not a Join user?</span>
+            <button class="sign-up-button" onclick="goTosignUp()">Sign up</button>
+       </div>
+    </div>
+    <div id="whole-body-id" class="whole-body">
+   </div>
+    </div>
+    <div class="footer-login">
+        <a href="privacy-policy-startpage.html" target="_blank" rel="noopener noreferrer">Privacy Policy</a>
+        <a href="legal-notice-startpage.html" target="_blank" rel="noopener noreferrer">Legal notice</a>
+    </div>
+</body>
+</html>

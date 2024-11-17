@@ -1,0 +1,962 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
+    <link
+      rel="stylesheet"
+      href="../style.css"
+    />
+    <link
+      rel="stylesheet"
+      href="../styles/board.css"
+    />
+    <link
+      rel="stylesheet"
+      href="../styles/boardresponsive.css"
+    />
+    <link
+      rel="stylesheet"
+      href="../styles/add-task.css"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      href="../assets/img/logo-white.png"
+    />
+    <title>Board - Join</title>
+  </head>
+  <body onload="renderBoard()">
+    <header class="header">
+      <img
+        class="logo-responsive"
+        src="../assets/img/logo-black.png"
+      />
+      <div
+        id="dropdown-profile"
+        class="dropdown-profile"
+      >
+        <div
+          onclick="location.href='help.html'"
+          class="dropdown-profile-buttons help-button"
+        >
+          Help
+        </div>
+        <a
+          class="dropdown-profile-buttons"
+          href="legal-notice.html"
+          >Legal Notice</a
+        >
+        <a
+          class="dropdown-profile-buttons"
+          href="privacy-policy.html"
+          >Privacy Policy</a
+        >
+        <div
+          onclick="guestLogInOrLogOut(); removeFirstLogin()"
+          class="dropdown-profile-buttons"
+        >
+          Log out
+        </div>
+      </div>
+      <p class="project-tool-info">Kanban Project Management Tool</p>
+      <div class="header-user-box">
+        <div class="help-logo">
+          <a href="./help.html"
+            ><img
+              src="../assets/icons/help.png"
+              alt=""
+          /></a>
+        </div>
+
+        <div
+          onclick="showProfileDropDownMenu()"
+          id="user-initials"
+          class="user-initials"
+        ></div>
+      </div>
+    </header>
+
+    <aside class="sidebar">
+      <a href="../html/summary.html"
+        ><img
+          class="sidebar-logo"
+          src="../assets/img/logo-white.png"
+          alt="logo white img"
+        />
+      </a>
+
+      <nav class="navbar">
+        <div class="nav-links-container">
+          <a
+            href="../html/summary.html"
+            class="nav-links"
+          >
+            <img
+              src="../assets/icons/summary.png"
+              alt="summary icon"
+            />Summary</a
+          >
+
+          <a
+            href="../html/add-task.html"
+            class="nav-links"
+          >
+            <img
+              src="../assets/icons/add-task.png"
+              alt="add task icon"
+            />
+            Add Task</a
+          >
+
+          <a
+            style="color: white; background-color: #091931"
+            class="nav-links"
+          >
+            <img
+              style="filter: brightness(150%)"
+              src="../assets/icons/board.png"
+              alt="board icon"
+            />
+            Board</a
+          >
+
+          <a
+            href="../html/contacts.html"
+            class="nav-links"
+          >
+            <img
+              src="../assets/icons/contacts.png"
+              alt="contacts icon"
+            />Contacts</a
+          >
+        </div>
+        <div class="../privacy-legal-notice-links-container">
+          <a
+            href="../html/privacy-policy.html"
+            class="nav-links"
+            id="privacy-policy"
+          >
+            Privacy Policy</a
+          >
+          <a
+            href="../html/legal-notice.html"
+            class="nav-links"
+            id="legal-notice"
+          >
+            Legal Notice</a
+          >
+        </div>
+      </nav>
+    </aside>
+
+    <main class="content-board">
+      <header class="board-header">
+        <div class="headline-container">
+          <h1>Board</h1>
+          <div class="headline-right-container">
+            <div class="input-container">
+              <input
+                type="search"
+                id="search-input"
+                placeholder="Find task"
+                oninput="searchTask()"
+              />
+              <img
+                src="../assets/icons/cancel.png"
+                alt="cancel icon"
+                class="input-cancel-img"
+                id="search-clear-btn"
+                onclick="cancelSearchTask()"
+              />
+              <div class="input-seperator"></div>
+              <img
+                src="../assets/icons/search.png"
+                alt="search icon"
+                class="input-search-img"
+              />
+            </div>
+
+            <button
+              class="add-task-button"
+              onclick="openAddTaskModal('todo'); setPrio('medium')"
+            >
+              <span>Add task</span>
+              <img
+                src="../assets/icons/add-plus.png"
+                alt="add task icon"
+              />
+            </button>
+          </div>
+        </div>
+      </header>
+
+      <section class="board-content-section">
+        <div class="kanban-container">
+          <div class="kanban-headline">
+            To do
+            <img
+              src="../assets/icons/plus-button.png"
+              alt="plus icon"
+              class="kanban-add-task-buttons"
+              onclick="openAddTaskModal('todo'); setPrio('medium')"
+            />
+          </div>
+          <div
+            class="kanban-list"
+            id="kanban-list-todo"
+            ondrop="drop('todo'); removeHighlight('kanban-list-todo')"
+            ondragover="allowDrop(event); highlight('kanban-list-todo')"
+            ondragleave="removeHighlight('kanban-list-todo')"
+          ></div>
+        </div>
+
+        <div class="kanban-container">
+          <div class="kanban-headline">
+            In progress
+            <img
+              src="../assets/icons/plus-button.png"
+              alt="plus icon"
+              class="kanban-add-task-buttons"
+              onclick="openAddTaskModal('in progress'); setPrio('medium')"
+            />
+          </div>
+          <div
+            class="kanban-list"
+            id="kanban-list-in-progress"
+            ondrop="drop('in progress'); removeHighlight('kanban-list-in-progress')"
+            ondragover="allowDrop(event); highlight('kanban-list-in-progress')"
+            ondragleave="removeHighlight('kanban-list-in-progress')"
+          ></div>
+        </div>
+
+        <div class="kanban-container">
+          <div class="kanban-headline">
+            Await feedback
+            <img
+              src="../assets/icons/plus-button.png"
+              alt="plus icon"
+              class="kanban-add-task-buttons"
+              onclick="openAddTaskModal('await feedback'); setPrio('medium')"
+            />
+          </div>
+          <div
+            class="kanban-list"
+            id="kanban-list-await-feedback"
+            ondrop="drop('await feedback'); removeHighlight('kanban-list-await-feedback')"
+            ondragover="allowDrop(event); highlight('kanban-list-await-feedback')"
+            ondragleave="removeHighlight('kanban-list-await-feedback')"
+          ></div>
+        </div>
+
+        <div class="kanban-container">
+          <div class="kanban-headline">
+            Done
+            <!-- <img
+              src="../assets/icons/plus-button.png"
+              alt="plus icon"
+            /> -->
+          </div>
+          <div
+            class="kanban-list"
+            id="kanban-list-done"
+            ondrop="drop('done'); removeHighlight('kanban-list-done')"
+            ondragover="allowDrop(event); highlight('kanban-list-done')"
+            ondragleave="removeHighlight('kanban-list-done')"
+          ></div>
+        </div>
+      </section>
+    </main>
+
+    <!-- SINGLE TASK MODAL SECTION -->
+    <section
+      class="task-modal"
+      id="task-modal"
+      onclick="closeDropdownMenu(inputAssignedTo); closeTaskModal();"
+    >
+      <!-- TODO: -->
+      <!-- TASK MODAL CARD -->
+      <div
+        class="task-modal-card"
+        id="task-modal-card"
+        onclick="event.stopPropagation()"
+      >
+        <div class="task-modal-card-header-container">
+          <div
+            class="task-modal-card-category"
+            id="task-modal-card-category"
+          ></div>
+          <img
+            class="close-task-modal"
+            src="../assets/icons/cancel.png"
+            alt="cancel icon"
+            onclick="closeTaskModal()"
+          />
+        </div>
+        <div
+          class="task-modal-card-title"
+          id="task-modal-card-title"
+        ></div>
+        <div
+          class="task-modal-card-description"
+          id="task-modal-card-description"
+        ></div>
+        <div class="task-modal-card-date">
+          <div class="task-modal-card-key">Due date:</div>
+          <span
+            class="task-modal-card-date-content"
+            id="task-modal-card-date-content"
+          ></span>
+        </div>
+        <div class="task-modal-card-prio">
+          <div class="task-modal-card-key">Priority:</div>
+          <span
+            class="task-modal-card-prio-content"
+            id="task-modal-card-prio-content"
+          ></span>
+          <img
+            alt="prio icon"
+            id="task-modal-card-prio-img"
+          />
+        </div>
+        <div
+          id="task-modal-card-assigned-to"
+          class="task-modal-card-assigned-to"
+        >
+          Assigned To:
+          <div
+            id="task-modal-assigned-contacts"
+            class="task-modal-card-assigned-to-list"
+          ></div>
+        </div>
+        <div
+          class="task-modal-card-subtasks"
+          id="task-modal-card-subtasks"
+        >
+          Subtasks:
+          <div
+            class="task-modal-card-subtasks-list"
+            id="task-modal-card-subtasks-list"
+          ></div>
+        </div>
+        <div class="task-modal-card-buttons">
+          <button id="task-delete-button">
+            <img
+              src="../assets/icons/delete.png"
+              alt="delete icon"
+            />
+            Delete
+          </button>
+          <div class="task-modal-card-buttons-seperator"></div>
+          <button id="task-edit-button">
+            <img
+              src="../assets/icons/edit.png"
+              alt="edit icon"
+            />
+            Edit
+          </button>
+        </div>
+      </div>
+
+      <!-- TODO: -->
+      <!-- TASK MODAL EDIT CARD -->
+      <div
+        class="task-modal-edit-card"
+        id="task-modal-edit-card"
+        onclick="event.stopPropagation()"
+      >
+        <div
+          class="task-modal-edit-card-close"
+          onclick="closeTaskModal()"
+        >
+          <img
+            class="close-task-modal"
+            src="../assets/icons/cancel.png"
+            alt="cancel icon"
+          />
+        </div>
+
+        <div class="edit-content-container">
+          <div class="form-container title-container">
+            <div
+              for="title"
+              class="add-task-labels"
+            >
+              Title
+            </div>
+            <input
+              type="text"
+              class="add-task-input-title-board"
+              id="edit-input-title"
+              name="title"
+            />
+          </div>
+          <span
+            class="error-edit"
+            id="error-title-edit"
+            >This field is required</span
+          >
+          <div class="form-container description-container">
+            <div
+              for="description"
+              class="add-task-labels"
+            >
+              Description
+            </div>
+            <textarea
+              type="text"
+              class="add-task-input-description-board"
+              id="edit-input-description"
+              name="description"
+              rows="3"
+            ></textarea>
+          </div>
+
+          <div class="form-container date-container">
+            <div
+              for="date"
+              class="add-task-labels"
+            >
+              Due date<span class="required-marker">*</span>
+            </div>
+            <input
+              type="date"
+              class="add-task-input-date"
+              id="edit-input-date"
+              name="date"
+            />
+          </div>
+          <span
+            class="error-edit"
+            id="error-date-edit"
+            >This field is required</span
+          >
+
+          <div class="form-container prio-container">
+            <div
+              for="prio"
+              class="add-task-labels"
+            >
+              Prio
+            </div>
+            <div class="prio-buttons-container">
+              <button
+                class="prio-buttons-board-edit"
+                id="edit-button-urgent"
+                onclick="setPrio('urgent')"
+              >
+                Urgent
+                <img
+                  src="../assets/icons/prio-urgent.png"
+                  alt="prio urgent icon"
+                  id="edit-button-urgent-img"
+                />
+              </button>
+              <button
+                class="prio-buttons-board-edit"
+                id="edit-button-medium"
+                onclick="setPrio('medium')"
+              >
+                Medium
+                <img
+                  src="../assets/icons/prio-medium.png"
+                  alt="prio medium icon"
+                  id="edit-button-medium-img"
+                />
+              </button>
+              <button
+                class="prio-buttons-board-edit"
+                id="edit-button-low"
+                onclick="setPrio('low')"
+              >
+                Low
+                <img
+                  src="../assets/icons/prio-low.png"
+                  alt="prio low icon"
+                  id="edit-button-low-img"
+                />
+              </button>
+            </div>
+          </div>
+
+          <div class="form-container assigned-to-container">
+            <div
+              for="assigned to"
+              class="add-task-labels"
+            >
+              Assigned to
+            </div>
+
+            <div
+              id="add-task-contact-container"
+              class="add-task-select-board"
+              onclick="dropDownContacts('searchContact-board');event.stopPropagation();"
+            >
+              <div style="cursor: pointer">
+                <input
+                  oninput="filterContactsInBoard('input-assigned-to')"
+                  autocomplete="off"
+                  placeholder="Select contacts to assign"
+                  type="text"
+                  id="searchContact-board"
+                />
+                <img
+                  id="arrowAssignTo"
+                  src="../assets/icons/arrow-down.png"
+                  alt="arrow-down"
+                />
+                <div
+                  class="add-task-select-board"
+                  id="input-assigned-to"
+                  onclick="event.stopPropagation();"
+                ></div>
+              </div>
+            </div>
+
+            <div id="assigned-contacts-list"></div>
+          </div>
+
+          <div class="form-container subtasks-container">
+            <div
+              for="subtasks"
+              class="add-task-labels"
+            >
+              Subtasks
+            </div>
+            <div class="add-task-input">
+              <input
+                type="subtasks"
+                name="subtasks"
+                placeholder="Add new subtask"
+                class="add-task-input-subtasks-board"
+                id="edit-input-subtask"
+                oninput="controlSubtaskIcons()"
+              />
+              <div class="add-task-input-buttons">
+                <img
+                  src="../assets/icons/add-subtask.png"
+                  alt="add subtask icon"
+                  id="edit-add-subtask-img"
+                />
+                <img
+                  src="../assets/icons/cancel-subtask.png"
+                  alt="plus icon"
+                  id="edit-cancel-subtask-img"
+                  onclick="cancelInputSubtask()"
+                />
+                <img
+                  src="../assets/icons/submit-subtask.png"
+                  alt="submit subtask icon"
+                  id="edit-submit-subtask-img"
+                  onclick="submitInputSubtask()"
+                />
+              </div>
+            </div>
+            <ul
+              class="subtasks-list"
+              id="edit-subtasks-list"
+            ></ul>
+          </div>
+        </div>
+
+        <div class="edit-task-buttons-container">
+          <button
+            class="edit-task-submit-button"
+            id="edit-task-submit-button"
+          >
+            OK
+            <img
+              src="../assets/icons/check.png"
+              alt="check icon"
+            />
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- TODO: -->
+    <!-- TASK MOVE TO CARD -->
+    <section
+      class="task-modal-move-to"
+      id="task-modal-move-to"
+      onclick="closeMoveToCard();"
+    >
+      <div
+        class="task-move-to-card"
+        id="task-move-to-card"
+        onclick="event.stopPropagation()"
+      >
+        <h2>Move to</h2>
+        <ul
+          class="board-column-selection-list"
+          id="board-column-selection-list"
+        ></ul>
+      </div>
+    </section>
+
+    <!-- TODO: -->
+    <!-- ADD TASK MODAL SECTION -->
+    <section
+      class="task-modal"
+      id="add-task-modal"
+      onclick="closeAddTaskModal()"
+    >
+      <div
+        class="add-task-modal-card"
+        id="add-task-modal-card"
+        onclick="event.stopPropagation()"
+      >
+        <div class="task-modal-card-header-container">
+          <header class="add-task-modal-header">
+            <h1>Add Task</h1>
+          </header>
+          <img
+            class="close-task-modal"
+            src="../assets/icons/cancel.png"
+            alt="cancel icon"
+            onclick="closeAddTaskModal()"
+          />
+        </div>
+
+        <div class="add-task-form-board">
+          <div class="left-container-board">
+            <div class="form-container title-container">
+              <div
+                for="title"
+                class="add-task-labels"
+              >
+                Title<span class="required-marker">*</span>
+              </div>
+              <input
+                type="text"
+                class="add-task-input-title-board"
+                id="input-title"
+                name="title"
+                placeholder="Enter a title"
+              />
+            </div>
+            <span
+              class="error-required"
+              id="error-title-add-task"
+              >This field is required</span
+            >
+            <div class="form-container description-container">
+              <div
+                for="description"
+                class="add-task-labels"
+              >
+                Description
+              </div>
+              <textarea
+                type="text"
+                class="add-task-input-description-board"
+                id="input-description"
+                name="description"
+                rows="4"
+                placeholder="Enter a description"
+              ></textarea>
+            </div>
+            <div class="form-container assigned-to-container">
+              <div
+                for="assigned to"
+                class="add-task-labels"
+              >
+                Assigned to
+              </div>
+              <div
+                onclick="dropDownContacts('searchContact-board-addTask', 1);event.stopPropagation();"
+                id="add-task-contact-container-addTask"
+                class="add-task-select-board"
+              >
+                <div style="cursor: pointer">
+                  <input
+                    oninput="filterContactsInBoard('input-assigned-to-addTask')"
+                    autocomplete="off"
+                    placeholder="Select contacts to assign"
+                    type="text"
+                    id="searchContact-board-addTask"
+                  /><img
+                    id="arrowAssignToAddTask"
+                    src="../assets/icons/arrow-down.png"
+                    alt="arrow-down"
+                  />
+                </div>
+                <div
+                  style="display: none"
+                  class="add-task-select-board"
+                  id="input-assigned-to-addTask"
+                  onclick="event.stopPropagation();"
+                ></div>
+              </div>
+            </div>
+            <div id="assigned-contacts-list-addTask"></div>
+          </div>
+          <div class="seperator-board"></div>
+          <div class="right-container-board">
+            <div class="form-container date-container">
+              <div
+                for="date"
+                class="add-task-labels"
+              >
+                Due date<span class="required-marker">*</span>
+              </div>
+              <input
+                type="date"
+                class="add-task-input-date-board"
+                id="input-date"
+                name="date"
+              />
+            </div>
+            <span
+              class="error-required"
+              id="error-date-add-task"
+              >This field is required</span
+            >
+            <div class="form-container date-container">
+              <div
+                for="prio"
+                class="add-task-labels"
+              >
+                Prio
+              </div>
+              <div class="prio-buttons-container">
+                <button
+                  class="prio-buttons-board"
+                  id="button-urgent"
+                  onclick="setPrio('urgent')"
+                >
+                  Urgent
+                  <img
+                    src="../assets/icons/prio-urgent.png"
+                    alt="prio urgent icon"
+                    id="button-urgent-img"
+                  />
+                </button>
+
+                <button
+                  class="prio-buttons-board"
+                  id="button-medium"
+                  onclick="setPrio('medium')"
+                >
+                  Medium
+                  <img
+                    src="../assets/icons/prio-medium-white.png"
+                    alt="prio medium icon"
+                    id="button-medium-img"
+                  />
+                </button>
+
+                <button
+                  class="prio-buttons-board"
+                  id="button-low"
+                  onclick="setPrio('low')"
+                >
+                  Low
+                  <img
+                    src="../assets/icons/prio-low.png"
+                    alt="prio low icon"
+                    id="button-low-img"
+                  />
+                </button>
+              </div>
+            </div>
+
+            <div class="form-container category-container">
+              <div
+                for="category"
+                class="add-task-labels"
+              >
+                Category<span class="required-marker">*</span>
+              </div>
+
+              <div class="add-task-select-container">
+                <select
+                  type="text"
+                  class="add-task-select-board"
+                  id="select-category"
+                  name="category"
+                >
+                  <option
+                    value="Select task category"
+                    disabled
+                    selected
+                    hidden
+                  >
+                    Select task category
+                  </option>
+                  <option value="User Story">User Story</option>
+                  <option value="Technical Task">Technical Task</option>
+                </select>
+              </div>
+            </div>
+            <span
+              class="error-required"
+              id="error-category-add-task"
+              >This field is required</span
+            >
+            <div class="form-container subtasks-container">
+              <div
+                for="subtasks"
+                class="add-task-labels"
+              >
+                Subtasks
+              </div>
+              <div class="add-task-input">
+                <input
+                  type="subtasks"
+                  name="subtasks"
+                  placeholder="Add new subtask"
+                  class="add-task-input-subtasks-board"
+                  id="input-subtask"
+                  oninput="controlSubtaskIcons()"
+                />
+                <div class="add-task-input-buttons">
+                  <img
+                    src="../assets/icons/add-subtask.png"
+                    alt="add subtask icon"
+                    id="add-subtask-img"
+                  />
+                  <img
+                    src="../assets/icons/cancel-subtask.png"
+                    alt="plus icon"
+                    id="cancel-subtask-img"
+                    onclick="cancelInputSubtask()"
+                  />
+                  <img
+                    src="../assets/icons/submit-subtask.png"
+                    alt="submit subtask icon"
+                    id="submit-subtask-img"
+                    onclick="submitInputSubtask()"
+                  />
+                </div>
+              </div>
+              <ul
+                class="subtasks-list"
+                id="subtasks-list"
+              ></ul>
+            </div>
+          </div>
+        </div>
+        <div class="add-task-footer-board">
+          <div class="required-div">
+            <span class="required-marker">*</span>This field is required
+          </div>
+          <div class="add-task-buttons-container">
+            <button
+              class="add-task-cancel-button"
+              onclick="cancelAddTask()"
+            >
+              <span>Cancel</span>
+              <img
+                src="../assets/icons/cancel.png"
+                alt=""
+              />
+            </button>
+            <div
+              class="add-task-submit-button"
+              onclick="createNewTask()"
+            >
+              <span>Create Task</span>
+              <img
+                src="../assets/icons/check.png"
+                alt=""
+              />
+            </div>
+          </div>
+        </div>
+        <span
+          id="add-task-error"
+          style="color: red"
+        ></span>
+        <div
+          id="info-toast"
+          class="hidden"
+        >
+          <p id="infoText"></p>
+          <img
+            src="../assets/icons/board.png"
+            width="30px"
+            height="30px"
+            alt="task icon"
+          />
+        </div>
+      </div>
+    </section>
+
+    <!-- INFO TEAST -->
+    <div
+      id="info-toast"
+      class="hidden"
+    >
+      <p id="infoText"></p>
+    </div>
+    <footer id="footer">
+      <div class="nav-links-responsive">
+        <a
+          href="../html/summary.html"
+          class="nav-links"
+        >
+          <img
+            src="../assets/icons/summary.png"
+            alt="summary icon"
+          />Summary</a
+        >
+      </div>
+      <div class="nav-links-responsive">
+        <a
+          href="../html/add-task.html"
+          class="nav-links"
+        >
+          <img
+            src="../assets/icons/add-task.png"
+            alt="add task icon"
+          />
+          Add Task</a
+        >
+      </div>
+      <div class="nav-links-board">
+        <a
+          style="color: white"
+          class="nav-links"
+        >
+          <img
+            style="filter: brightness(150%)"
+            src="../assets/icons/board.png"
+            alt="board icon"
+          />
+          Board</a
+        >
+      </div>
+      <div class="nav-links-responsive">
+        <a
+          href="../html/contacts.html"
+          class="nav-links"
+        >
+          <img
+            src="../assets/icons/contacts.png"
+            alt="contacts icon"
+          />Contacts</a
+        >
+      </div>
+    </footer>
+    <script src="../js/add-task.js"></script>
+    <script src="../js/add-task-contacts.js"></script>
+    <script src="../js/add-task-subtasks.js"></script>
+    <script src="../js/add-task-template.js"></script>
+    <script src="../js/board.js"></script>
+    <script src="../js/board-add-task.js"></script>
+    <script src="../js/board-contacts.js"></script>
+    <script src="../js/board-contacts2.js"></script>
+    <script src="../js/board-single-task.js"></script>
+    <script src="../js/board-single-task2.js"></script>
+    <script src="../js/create-HTML.js"></script>
+
+    <script
+      src="../js/script.js"
+      defer
+    ></script>
+  </body>
+</html>
